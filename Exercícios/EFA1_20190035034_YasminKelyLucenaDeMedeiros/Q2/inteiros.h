@@ -3,8 +3,10 @@
 
 typedef struct inteiros Inteiros;
 
-Inteiros* uniao_inteiros(Inteiros* a,Inteiros* b);
+Inteiros* uniaoInteiros(Inteiros* a,Inteiros* b);
 
+Inteiros* criarInteiro(int info);
+/*
 Inteiros* conjunto_vazio();
 
 int insere_num(Inteiros* a, int x);
@@ -27,5 +29,5 @@ int tamanho_inteiros(Inteiros* a);
 
 int e_vazio_inteiro(Inteiros* a);
  
-
+*/
 #endif
