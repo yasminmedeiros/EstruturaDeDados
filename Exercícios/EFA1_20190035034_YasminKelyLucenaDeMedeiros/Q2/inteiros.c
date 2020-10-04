@@ -7,60 +7,175 @@
 
 struct inteiros{
     int info;
-    struct Inteiros* inteiros;
+    struct inteiros* prox;
 };
-Inteiros* criarInteiro(int info){
-    Inteiros* aux = (Inteiros*) malloc(sizeof(Inteiros));
-    if(aux){
-        aux->info=info;
-        aux->inteiros=NULL;
+
+int tamanho_inteiros(Inteiros* a){
+    int counter=0;
+    while(a!=NULL){
+        counter++;
+        a = a->prox;
     }
+    return counter;
+}
+
+Inteiros* conjunto_vazio(){
+    Inteiros* aux = (Inteiros*) malloc(sizeof(Inteiros));
+    aux->prox=NULL;
+    aux->info=0;
     return aux;
 }
-Inteiros* uniaoInteiros(Inteiros* a,Inteiros* b){
-    Inteiros* aux =  (Inteiros*) malloc(sizeof(Inteiros));
-    if (a==NULL & b==NULL){
-        printf("Valores Nulos de Entrada");
-        return aux;
+
+int insere_num(Inteiros* a, int x){
+    if(a){
+        a->info=x;
+        return 1;
+    }else{
+        printf("Lista Vazia");
+        return 0;
     }
-    if(a==NULL){
-        return b;
+}
+
+int remove_num(Inteiros* a, int x){
+    Inteiros * aux = a->prox;
+    while(a->prox!=NULL){
+        if(aux->info ==x){
+            a->prox=aux->prox;
+            return 1;
+        }
+        a = a->prox;
+        aux = aux->prox;
+    }
+    printf("Não encontrado");
+    return 0;
+}
+
+Inteiros* intersecao_inteiros(Inteiros* a,Inteiros* b){return conjunto_vazio();}
+
+Inteiros* diferenca_inteiros(Inteiros* a,Inteiros* b){
+    Inteiros* aux = conjunto_vazio();
+
+    if(tamanho_inteiros(a)!= tamanho_inteiros(b)){
+        return 0;
     }
 
-    if(b==NULL){
-        return a;
-    }
+    int counter = tamanho_inteiros(a) -1;
 
-    while(a!=NULL){
-        aux->info = a->info;
-        aux->inteiros = a->inteiros;
-        aux = aux->inteiros;
-    }
+    aux->info = a->info - b->info;
 
-    return aux;
+    Inteiros* c = conjunto_vazio();
+
+    aux->prox = c;
+    a = a->prox;
+    b = b->prox;
+
+    while(counter>0){
+        c->info =(a->info - b->info);
+        a = a->prox;
+        b = b->prox;
+        counter--;
+        if(counter>0){
+            c->prox = conjunto_vazio();
+            c = c->prox;
+        }
+    }
+    return aux; 
     
 }
-/*
-Inteiros* conjunto_vazio();
 
-int insere_num(Inteiros* a, int x);
+int pertence_num(Inteiros* a, int x){
+    do{
+        if(a->info==x){
+            return 1;
+        }
+        a=a->prox;
+    }while(a->prox!=NULL);
+    if(a->info==x){
+            return 1;
+    }else{
+        return 0;
+    }
+}
 
-int remove_num(Inteiros* a, int x);
+int maior_num(Inteiros* a){
+    if(a){
+        int x = a->info;
+        do{
+            if(a->info>x){
+                x=a->info;
+            }
+            a=a->prox;
+        }while(a->prox!=NULL);
+        if(a->info>x){
+                x=a->info;
+        }
+        return x;
+    }else{
+        printf("Inteiro vazio");
+        return 0;
+    }
+}
 
-Inteiros* intersecao_inteiros(Inteiros* a,Inteiros* b);
+int menor_num(Inteiros* a){
+    if(a){
+        int x = a->info;
+        do{
+            if(a->info<x){
+                x=a->info;
+            }
+            a=a->prox;
+        }while(a->prox!=NULL);
+        if(a->info<x){
+                x=a->info;
+        }
+        return x;
+    }else{
+        printf("Inteiro vazio");
+        return 0;
+    }
+}
 
-Inteiros* diferenca_inteiros(Inteiros* a,Inteiros* b);
+int igualdade_inteiros(Inteiros* a,Inteiros* b){
+    if(tamanho_inteiros(a)!= tamanho_inteiros(b)){
+        return 0;
+    }
+    int counter = tamanho_inteiros(a);
+    while(counter!=0){
+        if(a->info!=b->info){
+            return 0;
+        }
+        a = a->prox;
+        b = b->prox;
+        counter--;
+    }
+    return 1;
+}
 
-int pertence_num(Inteiros* a, int x);
+int e_vazio_inteiro(Inteiros* a){
+    if (a->prox == conjunto_vazio()->prox & a->info==0){
+        return 1;
+    }else{
+        return 0;
+    }    
+}
 
-int maior_num(Inteiros* a);
+Inteiros* criarInteiros(Inteiros* l, int info){
+    Inteiros* aux = (Inteiros*) malloc(sizeof(Inteiros));
+    aux->info=info;
+    aux->prox=l;
+    return aux;
+}
 
-int menor_num(Inteiros* a);
+void printInteiros(Inteiros* a){
+    printf("Lista de Inteiros:\n");
+    while(a->prox!=NULL){
+        printf("%d\n",a->info);
+        a = a->prox;
+    }
+    printf("%d\n",a->info);
 
-int igualdade_inteiros(Inteiros* a,Inteiros* b);
+}
 
-int tamanho_inteiros(Inteiros* a);
+Inteiros* uniaoInteiros(Inteiros* a,Inteiros* b){return conjunto_vazio();}
 
-int e_vazio_inteiro(Inteiros* a);
-*/
 #endif
