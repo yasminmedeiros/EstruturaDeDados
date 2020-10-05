@@ -10,6 +10,14 @@ int main(){
     Inteiros* b3 = criarInteiros(NULL,3);
     Inteiros* b2 = criarInteiros(b3,4);
     Inteiros* b1 = criarInteiros(b2,3);
+
+    Inteiros* d3 = criarInteiros(NULL,1);
+    Inteiros* d2 = criarInteiros(d3,2);
+    Inteiros* d1 = criarInteiros(d2,2);
+    
+    Inteiros* c3 = criarInteiros(NULL,3);
+    Inteiros* c2 = criarInteiros(c3,2);
+    Inteiros* c1 = criarInteiros(c2,1);
     
     printf("Grupo A:\n");
     printInteiros(a1);
@@ -28,6 +36,13 @@ int main(){
     Inteiros* diferenca = diferenca_inteiros(a1,b1);
     printInteiros(diferenca);
 
+    printf("\nInterseccao de Numeros\n");
+    Inteiros* c = intersecao_inteiros(c1,d1);
+    printInteiros(c);
+
+    printf("\nUnião de Numeros\n");
+    Inteiros* d= uniaoInteiros(a1,b1);
+
     Inteiros* vazio = conjunto_vazio();
     if(e_vazio_inteiro(vazio)==1){
         printf("Vazio é um conjunto vazio!\n");
@@ -42,6 +57,5 @@ int main(){
     if(!pertence_num(a1,1)){
         printf("O numero 1 não pertence ao grupo 1\n");
     }
-
     return 0;
 }

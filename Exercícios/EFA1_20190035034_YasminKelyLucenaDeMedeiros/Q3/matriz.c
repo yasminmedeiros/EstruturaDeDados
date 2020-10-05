@@ -8,21 +8,17 @@
 struct matriz{
     int lin;
     int col;
-    int *v;
+    int v;
+    Matriz* prox;
 };
 
 Matriz* cria_matriz(int nl, int nc){
     Matriz* matriz = (Matriz*) malloc(sizeof(Matriz));
     if(matriz){
-        matriz->col = nc;
-        matriz->lin = nl;
-        matriz->v = (int*) malloc(nl*nc*sizeof(int*));
-        for(int i=0;i<nc;i++){
-            for (int j=0;i<nl;i++){
-                matriz->v[i*matriz->col+j] = 0;
-            }
-
-        }
+        matriz->col=nc;
+        matriz->lin=nl;
+        matriz->prox=NULL;
+        matriz->v = 0;
     }else{
         printf("Erro ao alocar memória!\n");
     }
@@ -33,9 +29,15 @@ Matriz* cria_matriz(int nl, int nc){
 void remover_matriz(Matriz* mat){
     free(mat);
 }
-int atribui_matriz(Matriz* mat, int i, int j,int v){
-    mat->v[i*mat->col+j] = v;
-    return 1;
+int atribui_matriz(Matriz* mat, int i, int j,int v, Matriz* prox){
+    if(mat){
+        mat->lin=i;
+        mat->col=j;
+        mat->v =v;
+        mat->prox=prox;
+        return 1;
+    }
+    return 0;
 }
 
 int acessa_matriz(Matriz* mat,int i,int j){

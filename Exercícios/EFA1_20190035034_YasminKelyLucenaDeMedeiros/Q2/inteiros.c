@@ -50,7 +50,25 @@ int remove_num(Inteiros* a, int x){
     return 0;
 }
 
-Inteiros* intersecao_inteiros(Inteiros* a,Inteiros* b){return conjunto_vazio();}
+Inteiros* intersecao_inteiros(Inteiros* a,Inteiros* b){
+    Inteiros* c = conjunto_vazio();
+    if(c){
+        while(a->prox!=NULL){
+            if(pertence_num(b,a->info)){
+                printf("aqui");
+                c = a;
+            }
+            a=a->prox;
+        }
+        c->prox=NULL;
+        
+        printInteiros(c);
+        return c;
+    }else{
+        printf("\nNão alocado espaço de memória\n");
+        return conjunto_vazio();
+    }
+}
 
 Inteiros* diferenca_inteiros(Inteiros* a,Inteiros* b){
     Inteiros* aux = conjunto_vazio();
@@ -90,11 +108,11 @@ int pertence_num(Inteiros* a, int x){
         }
         a=a->prox;
     }while(a->prox!=NULL);
+
     if(a->info==x){
             return 1;
-    }else{
-        return 0;
     }
+        return 0;
 }
 
 int maior_num(Inteiros* a){
@@ -176,6 +194,37 @@ void printInteiros(Inteiros* a){
 
 }
 
-Inteiros* uniaoInteiros(Inteiros* a,Inteiros* b){return conjunto_vazio();}
+Inteiros* uniaoInteiros(Inteiros* a,Inteiros* b){
+    Inteiros* c = conjunto_vazio();
+    
+    if (c){
+        c = a;
+        while (a->prox!= NULL)
+        { 
+            if(pertence_num(c,a->info) == 0){
+                c = a;
+                c = c->prox;
+            }
+            a = a->prox;
+            
+        }
+        printInteiros(c);
+        while (b->prox!= NULL){
+            if(pertence_num(c, b->info)==0){
+                c = b;
+                c = c->prox;
+            }
+            b = b->prox;
+        }
+        
+        return c;
+    }
+    else{
+        printf("Não foi possível alocar memória");
+        return conjunto_vazio();
+    }
+    
+    
+}
 
 #endif
