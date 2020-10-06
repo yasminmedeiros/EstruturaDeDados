@@ -3,11 +3,11 @@
 
 typedef struct matriz Matriz;
 
-Matriz* cria_matriz(int nl, int nc);
+Matriz* cria_matriz(int nl, int nc, int v, Matriz* prox);
 void remover_matriz(Matriz* mat);
-int atribui_matriz(Matriz* mat, int i, int j,int v);
+int atribui_matriz(Matriz* mat, int i, int j,int v,Matriz* prox);
 int acessa_matriz(Matriz* mat,int i,int j);
-int remover_valor_matriz(Matriz* mat,int i,int j);
+int remover_valor_matriz(Matriz* mat,int v);
 void print_matriz(Matriz* mat);
 int nlinhas(Matriz* mat);
 int ncolunas(Matriz* mat);

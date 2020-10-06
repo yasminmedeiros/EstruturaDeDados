@@ -3,9 +3,15 @@
 
 int main(){
 
-    Matriz *m = cria_matriz(2,2);
+    Matriz *m1x1 = cria_matriz();
+    Matriz *m1x2 = cria_matriz();
+    Matriz *m2x1 = cria_matriz();
+
+
+
+
     print_matriz(m);
-    if(atribui_matriz(m,0,1,2)==1){
+    if(atribui_matriz(m,0,1,2,NULL)==1){
         printf("\n");
         print_matriz(m);
     }

@@ -41,11 +41,12 @@ int main(){
     printInteiros(c);
 
     printf("\nUnião de Numeros\n");
-    Inteiros* d= uniaoInteiros(a1,b1);
+    Inteiros* d = uniaoInteiros(a1,b1);
+    printInteiros(d);
 
     Inteiros* vazio = conjunto_vazio();
     if(e_vazio_inteiro(vazio)==1){
-        printf("Vazio é um conjunto vazio!\n");
+        printf("\nVazio é um conjunto vazio!\n");
     }
 
     if(pertence_num(a1,1)){

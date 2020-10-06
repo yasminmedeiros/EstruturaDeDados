@@ -52,18 +52,21 @@ int remove_num(Inteiros* a, int x){
 
 Inteiros* intersecao_inteiros(Inteiros* a,Inteiros* b){
     Inteiros* c = conjunto_vazio();
+    Inteiros* aux= conjunto_vazio();
     if(c){
+        if(pertence_num(b,a->info)){
+                c = a;
+                aux = c;
+            }
         while(a->prox!=NULL){
             if(pertence_num(b,a->info)){
-                printf("aqui");
                 c = a;
             }
             a=a->prox;
         }
         c->prox=NULL;
         
-        printInteiros(c);
-        return c;
+        return aux;
     }else{
         printf("\nNão alocado espaço de memória\n");
         return conjunto_vazio();
@@ -109,7 +112,7 @@ int pertence_num(Inteiros* a, int x){
         a=a->prox;
     }while(a->prox!=NULL);
 
-    if(a->info==x){
+    if(a->info == x){
             return 1;
     }
         return 0;
@@ -196,35 +199,38 @@ void printInteiros(Inteiros* a){
 
 Inteiros* uniaoInteiros(Inteiros* a,Inteiros* b){
     Inteiros* c = conjunto_vazio();
-    
-    if (c){
+    Inteiros* aux = conjunto_vazio();
+
+    if(c){
+        
         c = a;
-        while (a->prox!= NULL)
-        { 
-            if(pertence_num(c,a->info) == 0){
-                c = a;
+        aux = a;
+        
+
+        while(a->prox!=NULL){
+            a = a->prox;
+            if(pertence_num(aux,a->info) == 0){
+                printf("\nAQUI: %d", c->info);
+                c->prox = a;
                 c = c->prox;
             }
-            a = a->prox;
             
         }
-        printInteiros(c);
-        while (b->prox!= NULL){
-            if(pertence_num(c, b->info)==0){
-                c = b;
+        while(b->prox!=NULL){
+            b = b->prox;
+            if(pertence_num(aux,b->info) == 0){
+                printf("\nAQUI: %d", c->info);
+                c->prox = b;
                 c = c->prox;
             }
-            b = b->prox;
         }
+        c->prox=NULL;
         
-        return c;
-    }
-    else{
-        printf("Não foi possível alocar memória");
+        return aux;
+    }else{
+        printf("\nNão alocado espaço de memória\n");
         return conjunto_vazio();
-    }
-    
-    
+    }   
 }
 
 #endif
