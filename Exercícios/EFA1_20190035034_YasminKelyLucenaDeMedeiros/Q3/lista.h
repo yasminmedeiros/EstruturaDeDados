@@ -9,7 +9,7 @@ Matriz* criarMatriz(int lin,int col);
 
 void apagarMatriz(Matriz* matriz);
 
-int inserirValor(Matriz* matriz, int lin, int col, float v);
+int inserirValor(Matriz* matriz, int lin, int col, int v);
 
 int retornarValor(Matriz* matriz, int lin, int col);
 

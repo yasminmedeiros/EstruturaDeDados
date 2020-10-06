@@ -5,24 +5,25 @@
 #include <stdlib.h>
 #include "lista.h"
 
-struct linha{
+struct lista{
     int lin;
     int col;
     int v;
-    struct linha* proxElementoDaLinha;
+    Lista* proxElementoDaLinha;
 };
 struct matriz_esparsa{
-    struct linha* linhas;
+    Lista* linhas;
     int lin;
     int col;
-}
+};
 
 Matriz* criarMatriz(int lin,int col){
     Matriz* a = (Matriz*)malloc(sizeof(Matriz));
-    a->linhas = (Linha*)mallor(sizeof(Linha));
-    a->linhas->lin = -1;
-    a->linhas->col = -1;
-    a->linhas->proxElementoDaLinha = NULL;
+    a->linhas = (Lista*)malloc(sizeof(Lista));
+    Lista* b = a->linhas;
+    b->col = -1;
+    b->lin = -1;
+    b->proxElementoDaLinha = NULL;
     a->lin=lin;
     a->col=col;
     return a;
@@ -31,24 +32,33 @@ Matriz* criarMatriz(int lin,int col){
 void apagarMatriz(Matriz* matriz){
     free(matriz);
 }
-Linha* criar linha
 
-int inserirValor(Matriz* matriz, int lin, int col, float v){
-    Linha* l = (Linha*)mallor(sizeof(Linha));
-    if(l & matriz){
-        while(matriz->linhas->proxElementoDaLinha == NULL){
-            matriz->linhas = matriz->linhas->proxElementoDaLinha
+int inserirValor(Matriz* matriz, int lin, int col, int v){
+    Lista* l = (Lista*)malloc(sizeof(Lista));
+    if(l!=NULL & matriz!=NULL){
+        Lista* x = matriz->linhas;
+        while(x->proxElementoDaLinha == NULL){
+            matriz->linhas = x->proxElementoDaLinha;
         }//ÚLTIMO ELEMENTO
 
         if(lin<=matriz->lin & col<=matriz->col){
             //PRIMEIRO CADASTRO
-            if(matriz->linhas->lin==-1){
-                matriz->linhas->lin = lin;
-                matriz->linhas->col = col;
-                matriz->linhas->proxElementoDaLinha= NULL;
+            if(x->lin==-1){
+                x = l;
+                l->lin = lin;
+                l->col = col;
+                l->v = v;
+                l->proxElementoDaLinha = NULL;
+                return 1;
             }else{
             //CADASTRO NORMAL
-            
+                x = l;
+                matriz->linhas= x;
+                l->lin = lin;
+                l->col = col;
+                l->v = v;
+                l->proxElementoDaLinha = NULL;
+                return 1;
             }
         }else{
             printf("Tamanho de linha e coluna inválidos\n");
@@ -60,10 +70,18 @@ int inserirValor(Matriz* matriz, int lin, int col, float v){
     
 }
 
-int retornarValor(Matriz* matriz, int lin, int col);
+int retornarValor(Matriz* matriz, int lin, int col){
+    Lista* x = matriz->linhas;
+    while (x->proxElementoDaLinha != NULL){
+        if(x->lin == lin & x->col == col){
+            return x->v;
+        }
+        x = x->proxElementoDaLinha;
+    }
+}
 
-int removerValor(Matriz* matriz, int lin, int col);
+int removerValor(Matriz* matriz, int lin, int col){return 1;}
 
-void printMatriz(Matriz* matriz);
+void printMatriz(Matriz* matriz){}
 
 #endif
