@@ -12,20 +12,42 @@ struct matriz{
     Matriz* prox;
 };
 
-Matriz* cria_matriz(int nl, int nc, int v, Matriz* prox){
+int add_matriz_final(int nl, int nc, int v, Matriz* mat){
     Matriz* matriz = (Matriz*) malloc(sizeof(Matriz));
+
+    while(mat->prox !=NULL){
+        mat = mat->prox;
+    }
     if(matriz){
+        mat->prox = matriz;
         matriz->col=nc;
         matriz->lin=nl;
-        matriz->prox=prox;
         matriz->v = v;
     }else{
         printf("Erro ao alocar memória!\n");
     }
     
-    return matriz;
+    return 1;
 }
 
+Matriz* cria_matriz_inicio(int nl, int nc, int v, Matriz* prox){
+    Matriz* matriz = (Matriz*) malloc(sizeof(Matriz));
+
+    if(matriz){
+        matriz->prox = prox;
+        matriz->col=nc;
+        matriz->lin=nl;
+        matriz->v = v;
+    }else{
+        printf("Erro ao alocar memória!\n");
+    }
+    
+    return ;
+}
+
+Matriz* add_matriz_meio(int nl, int nc, int v, Matriz* prox){
+
+}
 void remover_matriz(Matriz* mat){
     while(mat!=NULL){
         
