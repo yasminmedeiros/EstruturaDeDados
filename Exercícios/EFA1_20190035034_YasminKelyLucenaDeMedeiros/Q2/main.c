@@ -1,62 +1,88 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "inteiros.h"
 
 int main(){
-    Inteiros* a3 = criarInteiros(NULL,1);
-    Inteiros* a2 = criarInteiros(a3,2);
-    Inteiros* a1 = criarInteiros(a2,2);
-    
-    Inteiros* b3 = criarInteiros(NULL,3);
-    Inteiros* b2 = criarInteiros(b3,4);
-    Inteiros* b1 = criarInteiros(b2,3);
+    Inteiros *conj1 = conjunto_vazio(); 
+    Inteiros *conj2 = conjunto_vazio(); 
 
-    Inteiros* d3 = criarInteiros(NULL,1);
-    Inteiros* d2 = criarInteiros(d3,2);
-    Inteiros* d1 = criarInteiros(d2,2);
-    
-    Inteiros* c3 = criarInteiros(NULL,3);
-    Inteiros* c2 = criarInteiros(c3,2);
-    Inteiros* c1 = criarInteiros(c2,1);
-    
-    printf("Grupo A:\n");
-    printInteiros(a1);
-    
-    printf("Grupo B:\n");
-    printInteiros(b1);
 
-    printf("O tamanho do grupo a é %d!\n", tamanho_inteiros(a1));
-    printf("O tamanho do grupo b é %d!\n", tamanho_inteiros(b1));
+    printf("%s\n", e_vazio_inteiro(conj1) ? "Vazio" : "Não Vazio");
+    printf("%s\n", e_vazio_inteiro(conj2) ? "vazio" : "Não Vazio");
 
-    printf("O maior numero dentro do grupo a é %d!\n", maior_num(a1));
-    printf("O maior numero dentro do grupo b é %d!\n", maior_num(b1));
-     printf("O menor numero dentro do grupo a é %d!\n", menor_num(a1));
-    printf("O menor numero dentro do grupo b é %d!\n", menor_num(b1));
-    
-    Inteiros* diferenca = diferenca_inteiros(a1,b1);
+
+    printf("Conjunto 1:\n");
+    printf("%s\n", insere_num(&conj1,2) ? "Inserido Com Sucesso" : "Valor ja existe");
+    printf("%s\n", insere_num(&conj1,3) ? "Inserido Com Sucesso" : "Valor ja existe");
+    printf("%s\n", insere_num(&conj1,4) ? "Inserido Com Sucesso" : "Valor ja existe");
+    printf("%s\n", insere_num(&conj1,2) ? "Inserido Com Sucesso" : "Valor ja existe");
+    printf("%s\n", insere_num(&conj1,-4) ? "Inserido Com Sucesso": "Valor ja existe");
+    printf("%s\n", insere_num(&conj1,-9) ? "Inserido Com Sucesso" : "Valor ja existe");
+    printf("%s\n", insere_num(&conj1,7) ? "Inserido Com Sucesso" : "Valor ja existe");
+
+    printf("Conjunto 2:\n");
+    printf("%s\n", insere_num(&conj2,4) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,5) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,2) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,-8) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,2) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,5) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,7) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,9) ? "Valor inserido" : "Valor ja existe no Inteiros");
+    printf("%s\n", insere_num(&conj2,8) ? "Valor inserido" : "Valor ja existe no Inteiros");
+
+    printf("\nConjunto 1: ");
+    printInteiros(conj1);
+    printf("\nConjunto 2: ");
+    printInteiros(conj2);
+
+
+
+ 
+
+
+    printf("\n");
+    Inteiros* uniao = uniaoInteiros(&conj1, &conj2); 
+    printf("Inteiros uniao: ");
+    printInteiros(uniao); 
+
+    printf("\n");
+    Inteiros *interseccao = intersecao_inteiros(&conj1, &conj2); 
+    printf("Inteiros interseccao: ");
+    printInteiros(interseccao);
+
+   
+
+    printf("\n");
+    Inteiros *diferenca = diferenca_inteiros(&conj1, &conj2); 
+    printf("Inteiros diferenca entre 1 e 2: ");
     printInteiros(diferenca);
 
-    printf("\nInterseccao de Numeros\n");
-    Inteiros* c = intersecao_inteiros(c1,d1);
-    printInteiros(c);
+    
 
-    printf("\nUnião de Numeros\n");
-    Inteiros* d = uniaoInteiros(a1,b1);
-    printInteiros(d);
+    // Funcao pertence_num
 
-    Inteiros* vazio = conjunto_vazio();
-    if(e_vazio_inteiro(vazio)==1){
-        printf("\nVazio é um conjunto vazio!\n");
-    }
+    printf("\n");
+    printf("%s\n", pertence_num(conj1, 5) ? "pertence_num" : "Nao pertence_num");
+    printf("%s\n", pertence_num(conj1, 8) ? "pertence_num" : "Nao pertence_num");
+    printf("%s\n", pertence_num(conj1, 9) ? "pertence_num" : "Nao pertence_num");
+    printf("%s\n", pertence_num(conj2, 5) ? "pertence_num" : "Nao pertence_num");
+    printf("%s\n", pertence_num(conj2, 1) ? "pertence_num" : "Nao pertence_num");
+    printf("%s\n", pertence_num(conj2, 4) ? "pertence_num" : "Nao pertence_num");
 
-    if(pertence_num(a1,1)){
-        printf("O numero 1 pertence ao grupo 1\n");
-    }
 
-    remove_num(a1,1);
+    printf("Maior valor do Inteiros 1: %i\n", maior_num(conj1));
+    printf("Menor valor do Inteiros 1: %i\n", menor_num(conj1));
+    printf("Maior valor do Inteiros 2: %i\n", maior_num(conj2));
+    printf("Menor valor do Inteiros 2: %i\n", menor_num(conj2));
 
-    if(!pertence_num(a1,1)){
-        printf("O numero 1 não pertence ao grupo 1\n");
-    }
+
+    printf("%s\n", igualdade_inteiros(conj1, conj2) ? "Os Inteiros sao iguais" : "Os Inteiros sao diferentes");
+
+    printf("Tamanho do Inteiros 1: %i\n", tamanho_inteiros(conj1));
+    printf("Tamanho do Inteiros 2: %i\n", tamanho_inteiros(conj2));
+
+    printf("%s\n", remove_num(&conj1, 9) ? "Removido" : "Nao encontrado");
+    
+
     return 0;
 }

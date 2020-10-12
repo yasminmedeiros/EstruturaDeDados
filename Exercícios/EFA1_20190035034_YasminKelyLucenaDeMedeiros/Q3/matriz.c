@@ -121,4 +121,3 @@ void print_matriz(MATRIZ * mat){
 	}
 }
 
-
