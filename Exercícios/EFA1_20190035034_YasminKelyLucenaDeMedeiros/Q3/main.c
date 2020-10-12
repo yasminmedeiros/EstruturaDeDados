@@ -1,36 +1,31 @@
 #include <stdio.h>
-#include "conjunto.h"
+#include "matriz.h"
 
 int main(){
 
-    Conjunto *conj1=criar_conj_vazio(), *conj2 = criar_conj_vazio();
-    Conjunto *conj3;
-
-    printf("%d a\n", size(conj1));
-    printf("%d a\n", conj_vazio(conj1));
-    printf("%d a\n", inserir(&conj1,1));
-    printf("%d a\n", inserir(&conj1,1));
-    printf("%d a\n", inserir(&conj1,2));
-    printf("%d a\n", inserir(&conj1,3));
-    printf("%d a\n", inserir(&conj1,60));
-    printf("%d a\n", inserir(&conj1,6));
-    printf("%d a\n", inserir(&conj1,5));
-    printf("%d a\n", inserir(&conj1,4));
-    printf("%d a\n", inserir(&conj1,5));
-
-    printf("%d a\n", inserir(&conj2,30));
-    printf("%d a\n", inserir(&conj2,60));
-    printf("%d a\n", inserir(&conj2,1));
-    printf("%d a\n", inserir(&conj2,7));
-    printf("%d a\n", inserir(&conj2,8));
-    printf("%d a\n", inserir(&conj2,5));
-    printf("%d a\n", inserir(&conj2,20));
-    printf("%d a\n", inserir(&conj2,5));
-    printf("%d a\n", inserir(&conj2,2));
+    Matriz *matriz = criaMatriz(5,5);
 
     
 
+    printf("%s\n", atribuiElemento(matriz,3,1,8) ? "Adicionado\n" : "Dado Inexistente\n");
+    printf("%s\n", atribuiElemento(matriz,5,2,5) ? "Adicionado\n" : "Dado Inexistente\n");
+    printf("%s\n", atribuiElemento(matriz,2,2,2) ? "Adicionado\n" : "Dado Inexistente\n");
+    printf("%s\n", atribuiElemento(matriz,8,3,3) ? "Adicionado\n" : "Dado Inexistente\n");
+    printf("%s\n", atribuiElemento(matriz,1,1,5) ? "Adicionado\n" : "Dado Inexistente\n");
 
-    conj3 = und
+    printMatriz(matriz);
+    
+    printf("Elemento da posicao: %d\n", acessarElemento(matriz,2,1));
+    printf("Elemento da posicao: %d\n", acessarElemento(matriz,3,1));
+    printf("Elemento da posicao: %d\n", acessarElemento(matriz,2,2));
+
+    printf("\n");
+    printf("%s\n", removerElemento(matriz,3,1) ? "Removido" : "Dado Inexistente\n");
+    printf("%s\n", removerElemento(matriz,10,3) ? "Removido" : "Dado Inexistente\n");
+    printf("%s\n", removerElemento(matriz,13,1) ? "Removido" : "Dado Inexistente\n");
+    
+    printMatriz(matriz);
+    liberaMatriz(matriz);
+
     return 0;
 }
