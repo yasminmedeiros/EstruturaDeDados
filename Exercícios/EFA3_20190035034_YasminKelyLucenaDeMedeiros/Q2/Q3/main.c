@@ -3,13 +3,11 @@
 #include "arvore.h"
 int main (){
     Arvore* a = criaArvore (
-                    criaNo(2,
-                        criaNo(4,
-                            criaNo(5,NULL,NULL),
-                            NULL),
-                    criaNo(1,NULL,
-                        criaNo(3,
-                            NULL,
-                            criaNo(6, NULL,NULL)))));
-     printf(​"Quantidade de valores pares: %d\n"​, pares(a));
+                    criaNo(3,
+                        criaNo(1,criaNo(2,NULL,NULL),NULL),
+                        criaNo(4,NULL,criaNo(5,NULL,criaNo(8,criaNo(6,NULL,NULL),NULL)))
+                    )
+                );
+
+    printf("O número de nós que possuem apenas um filho: %d\n",um_filho(a));
 }

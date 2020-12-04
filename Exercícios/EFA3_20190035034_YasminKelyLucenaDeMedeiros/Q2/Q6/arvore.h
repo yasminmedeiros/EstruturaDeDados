@@ -1,3 +1,4 @@
+
 #ifndef ARVORE
 #define ARVORE
 
@@ -6,6 +7,6 @@ typedef struct no No;
 
 No* criaNo (int info, No* esq , No* dir);
 Arvore* criaArvore (No* r);
-int nfolhas_maiores  (Arvore* a, int x);
-int nfolhas(No* r, int x);
+int somatotal (Arvore* a, int x);
+void soma(No* r, int x,int* num);
 #endif

@@ -1,15 +1,14 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "arvore.h"
 
-struct No {  
+struct no {  
     int info;
     No* esq;
     No* dir;
 };
-struct Arvore{
+struct arvore{
     No* raiz;
 };
 No* criaNo (int info, No* esq , No* dir){
@@ -27,18 +26,17 @@ Arvore* criaArvore (No* r){
     return a;
 }
 
-
-int somatotal (Arvore* a, int x, int y){
-    return nfolhas(a->raiz, x,y);
-}
-
-
-int soma(No* r, int x, int y){
+int somatotal (Arvore* a, int x){
     int num = 0;
+    soma(a->raiz,x,&num);
+    return num;
+}
+void soma(No* r, int x, int* num){
     if(r!=NULL){
-        if(r->info >y && r->info<x)
-            num+=r->info;
-        numFilhos(r->dir);
-        numFilhos(r->esq);
+         if(r->info >x)
+            *num+=1;
+        soma(r->dir,x,num);
+        soma(r->esq,x,num);
     }
 }
+

@@ -3,12 +3,12 @@
 #include <string.h>
 #include "arvore.h"
 
-struct No{  
+struct no{  
     int info;
     No* esq;
     No* dir;
 };
-struct Arvore{
+struct arvore{
     No* raiz;
 };
 
@@ -27,12 +27,17 @@ Arvore* criaArvore (No* r){
 }
 
 int pares (Arvore* a){
-    return noPar(a->raiz);
+    int num = 0;
+    noPar(a->raiz,&num);
+    return num;
 }
-int noPar(No* r){
-    int nParNo = 0;
-    if(r->info % 2 ==0)
-        nParNo+=1;
-    noPar(r->esq);
-    noPar(r->dir);
+
+void noPar(No* r, int* num){
+    if(r!=NULL){ 
+        if(r->info % 2 ==0)
+            *num = *num + 1;
+        noPar(r->esq, num);
+        noPar(r->dir,num);
+    }
+    
 }

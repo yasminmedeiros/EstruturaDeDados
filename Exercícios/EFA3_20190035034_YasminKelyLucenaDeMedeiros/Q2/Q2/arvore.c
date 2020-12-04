@@ -1,18 +1,14 @@
-//.Implemente uma função que retorne a quantidade de folhas de uma árvore binária.
-
-int folhas (Arv* a);
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "arvore.h"
 
-struct No {  
+struct no {  
     int info;
     No* esq;
     No* dir;
 };
-struct Arvore{
+struct arvore{
     No* raiz;
 };
 No* criaNo (int info, No* esq , No* dir){
@@ -30,15 +26,18 @@ Arvore* criaArvore (No* r){
     return a;
 }
 
-int folhas (Arv* a){
-    return numFolhas(a->raiz);
+int folhas (Arvore* a){
+    int num = 0;
+    numFolhas(a->raiz,&num);
+    return num;
 }
 
-int numFolhas(No* r){
-    int num = 0;
-    if(r->dir == NULL && r->esq != NULL){
-        num+=1;
-    numFolhas(r->dir);
-    numFolhas(r->esq);
+void numFolhas(No* r, int* num){
+    if(r!=NULL){
+        if(r->dir == NULL && r->esq != NULL)
+            *num+=1;
+        numFolhas(r->dir,num);
+        numFolhas(r->esq,num);
+    }
 }
 
